@@ -31,14 +31,14 @@
 
       // iOS (Safari ou WebView)
       if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = "lanterna.usdz";
+        window.location.href = "SM_Balanca_FM25.usdz";
       }
       // Android com Scene Viewer
       else if (/android/i.test(userAgent)) {
         window.location.href =
           "intent://arvr.google.com/scene-viewer/1.0?file=" +
           location.origin + location.pathname.replace(/\/[^\/]*$/, '/') +
-          "lanterna2.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=" +
+          "SM_Balanca_FM25.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=" +
           location.origin +
           ";end;";
       }
@@ -48,6 +48,6 @@
       }
     }
   </script>
-  <model-viewer alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum" src="lanterna.glb" shadow-intensity="1" camera-controls touch-action="pan-y" size="500%"></model-viewer>
+  <model-viewer alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum" src="SM_Balanca_FM25.glb" shadow-intensity="1" camera-controls touch-action="pan-y" size="500%"></model-viewer>
 </body>
 </html>
