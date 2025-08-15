@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Visualizar Produto em AR</title>
+  <style>
+    .ar-button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    model-viewer {
+      width: 800px;
+      height: 600px;
+}
+  </style>
+</head>
+<body>
+  <h1>Ver Lanterna em Realidade Aumentada</h1>
+  <button class="ar-button" onclick="openAR()">Abrir em AR</button>
+
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+  <script>
+    function openAR() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      // iOS (Safari ou WebView)
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href = "lanterna.usdz";
+      }
+      // Android com Scene Viewer
+      else if (/android/i.test(userAgent)) {
+        window.location.href =
+          "intent://arvr.google.com/scene-viewer/1.0?file=" +
+          location.origin + location.pathname.replace(/\/[^\/]*$/, '/') +
+          "lanterna2.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=" +
+          location.origin +
+          ";end;";
+      }
+      // Fallback para desktop
+      else {
+        alert("Este recurso de AR está disponível apenas em dispositivos móveis compatíveis.");
+      }
+    }
+  </script>
+  <model-viewer alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum" src="lanterna.glb" shadow-intensity="1" camera-controls touch-action="pan-y" size="500%"></model-viewer>
+</body>
+</html>
