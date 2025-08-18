@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Visualizar Produto em AR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     .ar-button {
       padding: 12px 24px;
@@ -17,7 +16,7 @@
     model-viewer {
       width: 800px;
       height: 600px;
-    }
+}
   </style>
 </head>
 <body>
@@ -48,26 +47,7 @@
         alert("Este recurso de AR está disponível apenas em dispositivos móveis compatíveis.");
       }
     }
-
-    // ⚡ Auto-redirecionamento: chama openAR automaticamente ao carregar a página em dispositivos móveis
-    window.addEventListener('load', () => {
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
-      const isAndroid = /android/i.test(ua);
-
-      // Executa automaticamente apenas em iOS/Android para evitar alerta automático no desktop
-      if (isIOS || isAndroid) {
-        openAR();
-      }
-    });
   </script>
-
-  <model-viewer
-    alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
-    src="SM_Balanca_FM25.glb"
-    shadow-intensity="1"
-    camera-controls
-    touch-action="pan-y"
-  ></model-viewer>
+  <model-viewer alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum" src="SM_Balanca_FM25.glb" shadow-intensity="1" camera-controls touch-action="pan-y" size="500%"></model-viewer>
 </body>
 </html>
