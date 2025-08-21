@@ -44,10 +44,7 @@
                 ios-src="SM_Balanca_FM25.usdz"
                 shadow-intensity="1"
                 camera-controls
-                touch-action="pan-y"
-                ar
-                ar-modes="webxr scene-viewer quick-look"
-                ar-scale="auto">
+                touch-action="pan-y">
             </model-viewer>
         </div>
 
@@ -83,44 +80,29 @@
         </div>
     </div>
 
-    <script>
-        // Função para abrir a visualização em Realidade Aumentada
-        function openAR() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  <script>
+    function openAR() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-            // iOS (Safari ou WebView)
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                // Cria um link temporário para o arquivo .usdz e simula um clique
-                const a = document.createElement('a');
-                a.href = "SM_Balanca_FM25.usdz";
-                a.rel = "ar";
-                a.appendChild(document.createElement('img')); // Necessário para o link AR funcionar no iOS
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            }
-            // Android com Scene Viewer
-            else if (/android/i.test(userAgent)) {
-                // Constrói e navega para o intent do Scene Viewer
-                const intentUrl = "intent://arvr.google.com/scene-viewer/1.0?file=" +
-                                  location.origin + location.pathname.replace(/\/[^\/]*$/, '/') +
-                                  "SM_Balanca_FM25.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=" +
-                                  location.origin + ";end;";
-                window.location.href = intentUrl;
-            }
-            // Fallback para desktop ou dispositivos não compatíveis
-            else {
-                // Em vez de um alert, podemos usar um modal ou uma mensagem na própria página
-                const modelViewer = document.querySelector("model-viewer");
-                if (modelViewer) {
-                    modelViewer.activateAR().catch(error => {
-                        console.error("AR not supported on this device:", error);
-                        // Aqui você pode exibir uma mensagem de erro mais amigável na interface
-                    });
-                }
-            }
-        }
-    </script>
+      // iOS (Safari ou WebView)
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href = "SM_Balanca_FM25.usdz";
+      }
+      // Android com Scene Viewer
+      else if (/android/i.test(userAgent)) {
+        window.location.href =
+          "intent://arvr.google.com/scene-viewer/1.0?file=" +
+          location.origin + location.pathname.replace(/\/[^\/]*$/, '/') +
+          "SM_Balanca_FM25.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=" +
+          location.origin +
+          ";end;";
+      }
+      // Fallback para desktop
+      else {
+        alert("Este recurso de Realidade Aumentada está disponível apenas em dispositivos móveis compatíveis.");
+      }
+    }
+  </script>
 
 </body>
 </html>
