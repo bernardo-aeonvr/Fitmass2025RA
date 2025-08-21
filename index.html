@@ -1,53 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Visualizar Produto em AR</title>
-  <style>
-    .ar-button {
-      padding: 12px 24px;
-      font-size: 16px;
-      background-color: #007aff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    model-viewer {
-      width: 800px;
-      height: 600px;
-}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitmass Bioscan 3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Importa o componente model-viewer -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <style>
+        body {
+            font-family: 'Encode Sans', sans-serif;
+            background-color: #333333; /* Cor de fundo personalizada */
+        }
+        .ar-button {
+            background-color: #88BD23; /* Cor verde personalizada */
+        }
+        .ar-button:hover {
+            filter: brightness(0.9); /* Efeito de hover simples para a cor personalizada */
+        }
+        model-viewer {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+    </style>
 </head>
-<body>
-  <h1>Ver Balança em Realidade Aumentada</h1>
-  <button class="ar-button" onclick="openAR()">Abrir em AR</button>
+<body class="text-white flex flex-col items-center justify-center min-h-screen p-6"> <!-- p-6 = padding: 1.5rem (24px) -->
 
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <div class="max-w-md w-full text-center flex flex-col items-center justify-between h-full">
+        <!-- Top Description -->
+        <p class="text-lg md:text-xl leading-relaxed mb-4"> <!-- mb-4 = margin-bottom: 1rem (16px) -->
+            Mais do que uma balança, o Fitmass Bioscan 3.0 é a tecnologia que mede gordura corporal, massa muscular, hidratação e metabolismo em segundos.
+        </p>
 
-  <script>
-    function openAR() {
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        <!-- 3D Model Viewer -->
+        <div class="w-full aspect-square rounded-lg mb-4 flex items-center justify-center"> <!-- mb-4 = margin-bottom: 1rem (16px) -->
+            <model-viewer
+                alt="Modelo 3D da balança Fitmass"
+                src="SM_Balanca_FM25.glb"
+                ios-src="SM_Balanca_FM25.usdz"
+                shadow-intensity="1"
+                camera-controls
+                touch-action="pan-y"
+                ar
+                ar-modes="webxr scene-viewer quick-look"
+                ar-scale="auto">
+            </model-viewer>
+        </div>
 
-      // iOS (Safari ou WebView)
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = "SM_Balanca_FM25.usdz";
-      }
-      // Android com Scene Viewer
-      else if (/android/i.test(userAgent)) {
-        window.location.href =
-          "intent://arvr.google.com/scene-viewer/1.0?file=" +
-          location.origin + location.pathname.replace(/\/[^\/]*$/, '/') +
-          "SM_Balanca_FM25.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=" +
-          location.origin +
-          ";end;";
-      }
-      // Fallback para desktop
-      else {
-        alert("Este recurso de Realidade Aumentada está disponível apenas em dispositivos móveis compatíveis.");
-      }
-    }
-  </script>
-  <model-viewer alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum" src="SM_Balanca_FM25.glb" shadow-intensity="1" camera-controls touch-action="pan-y" size="500%"></model-viewer>
+        <!-- Bottom Description -->
+        <p class="text-lg md:text-xl leading-relaxed mb-4"> <!-- mb-4 = margin-bottom: 1rem (16px) -->
+            Ele mostra a evolução real dos alunos, motiva resultados e ainda pode ser usado como ponto de venda interativo dentro da academia!
+        </p>
+
+        <!-- AR Button -->
+        <a href="#" class="ar-button text-black font-bold text-xl md:text-2xl py-4 px-8 rounded-2xl w-full transition-all duration-300 mb-4 shadow-lg" onclick="openAR()"> <!-- mb-4 = margin-bottom: 1rem (16px) -->
+            Visualizar em AR
+        </a>
+
+        <!-- Logo -->
+        <div class="flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="108" height="24" viewBox="0 0 72 16" fill="none">
+              <path d="M24.5895 10.6624L25.5534 1.6631C25.7443 0.575173 26.5235 -7.62939e-05 27.6041 -7.62939e-05C28.5578 -7.62939e-05 29.3686 0.404031 29.6229 1.4143L31.4193 7.94221C31.4193 7.98896 31.4349 7.98896 31.4349 7.98896C31.4509 7.98896 31.4668 7.98896 31.4668 7.94221L33.2313 1.46067C33.5015 0.450774 34.3283 -7.62939e-05 35.298 -7.62939e-05C36.363 -7.62939e-05 37.1259 0.590629 37.2848 1.70946L38.6042 10.6624H36.2516L35.2185 2.45585C35.2185 2.3782 35.2025 2.33146 35.1391 2.33146C35.0915 2.33146 35.0596 2.36237 35.0437 2.42457L33.0568 9.35659C32.8341 10.149 32.1985 10.5376 31.4353 10.5376C30.672 10.5376 30.0209 10.1644 29.8301 9.40295L27.8432 2.42419C27.8273 2.34653 27.7953 2.33108 27.7638 2.33108C27.7163 2.33108 27.6684 2.36199 27.6684 2.44002L26.9424 10.662H24.5899L24.5895 10.6624Z" fill="#F8F8F8"/>
+              <path d="M53.7827 8.4138L55.7221 7.48231C56.0718 8.23059 56.8187 8.61246 57.9316 8.61246C58.9332 8.61246 59.6961 8.21551 59.6961 7.48231C59.6961 6.62698 58.8534 6.48976 57.7408 6.30656C56.1352 6.04683 53.9576 5.49721 53.9576 3.17624C53.9576 1.37434 55.6426 -7.62939e-05 57.8522 -7.62939e-05C59.6167 -7.62939e-05 61.1424 0.778735 61.8262 2.24475L59.8869 3.17624C59.5368 2.51956 58.8378 2.06155 57.7568 2.06155C56.8825 2.06155 56.2782 2.45849 56.2782 3.08463C56.2782 3.90906 57.1684 4.12317 58.3285 4.32146C59.9181 4.58081 62.0163 5.1308 62.0163 7.46686C62.0163 9.31437 60.2043 10.6582 57.9313 10.6582C56.0075 10.6582 54.4658 9.87944 53.7823 8.41342" fill="#F8F8F8"/>
+              <path d="M63.7329 8.4138L65.6722 7.48231C66.0219 8.23059 66.7688 8.61246 67.8818 8.61246C68.8834 8.61246 69.6462 8.21551 69.6462 7.48231C69.6462 6.62698 68.8035 6.48976 67.6909 6.30656C66.0854 6.04683 63.9077 5.49721 63.9077 3.17624C63.9077 1.37434 65.5927 -7.62939e-05 67.8023 -7.62939e-05C69.5668 -7.62939e-05 71.0926 0.778735 71.7764 2.24475L69.8371 3.17624C69.487 2.51956 68.7879 2.06155 67.7069 2.06155C66.8327 2.06155 66.2283 2.45849 66.2283 3.08463C66.2283 3.90906 67.1185 4.12317 68.2786 4.32146C69.8682 4.58081 71.9664 5.1308 71.9664 7.46686C71.9664 9.31437 70.1544 10.6582 67.8814 10.6582C65.9576 10.6582 64.4159 9.87944 63.7325 8.41342" fill="#F8F8F8"/>
+              <path d="M48.8168 1.67855C48.412 0.543885 47.3553 -7.62939e-05 46.2282 -7.62939e-05C45.1012 -7.62939e-05 44.062 0.543885 43.6572 1.67855L40.5224 10.6624H43.1467L43.8335 8.53292L44.5025 6.49693L45.8584 2.34691C45.9291 2.1294 46.0519 2.03591 46.2457 2.03591C46.4571 2.03591 46.5627 2.12903 46.6331 2.34691L47.9714 6.49693L48.6355 8.51746H48.6404L49.3273 10.6624H51.9512L48.8164 1.67855H48.8168Z" fill="#8EBF2F"/>
+              <path d="M40.4963 11.828H42.8328C43.4201 13.0215 44.6068 13.6371 46.2314 13.6371C47.9556 13.6371 49.0552 13.0215 49.6425 11.828H51.979C51.3416 14.4121 49.0678 15.9999 46.2314 15.9999C43.395 15.9999 41.1337 14.4125 40.4967 11.828" fill="#8EBF2F"/>
+              <path d="M11.8635 0.0327454H9.55127V10.6032H11.8635V0.0327454Z" fill="#F8F8F8"/>
+              <path d="M22.2728 2.1528H19.1373V10.6029H16.8247V2.1528H13.6891V0.0327454H22.2728V2.1528Z" fill="#F8F8F8"/>
+              <path d="M6.18522 4.91732H2.34572V2.15303H7.68285V0.0329742H2.0766C0.619639 0.0329742 0.0335083 0.802361 0.0335083 2.01167V10.6027H2.34572V7.02154H6.18522V4.91694V4.91732Z" fill="#F8F8F8"/>
+              <path d="M20.1916 12.0753L21.2634 14.4541L21.6019 12.0753H22.448L21.8924 15.9934H21.0462L19.9716 13.6145L19.636 15.9934H18.7899L19.3455 12.0753H20.1916Z" fill="#8EBF2F"/>
+              <path d="M18.508 15.9934H17.6619L17.518 15.1538H16.0683L15.6875 15.9934H14.8414L16.5816 12.0753H17.879L18.508 15.9934ZM16.4434 14.3142H17.3798L17.1119 12.9149L16.4434 14.3142Z" fill="#8EBF2F"/>
+              <path d="M13.0248 14.8739C13.0211 14.8963 13.0192 14.9178 13.0192 14.9383C13.0192 15.082 13.1019 15.1538 13.2674 15.1538H14.6776L14.5592 15.9934H13.1489C12.4889 15.9934 12.1589 15.7061 12.1589 15.1314C12.1589 15.0512 12.1655 14.9654 12.1787 14.8739L12.4184 13.1947C12.5237 12.4484 12.9524 12.0753 13.7046 12.0753H15.1148L14.9963 12.9149H13.5861C13.3981 12.9149 13.2909 13.0082 13.2646 13.1947L13.0248 14.8739Z" fill="#8EBF2F"/>
+              <path d="M8.63574 15.9934L8.7542 15.1538H10.4465C10.6345 15.1538 10.7417 15.0605 10.768 14.8739L10.7878 14.734C10.7915 14.7116 10.7934 14.6902 10.7934 14.6696C10.7934 14.526 10.7107 14.4541 10.5452 14.4541H9.98111C9.323 14.4541 8.99394 14.1687 8.99394 13.5978C8.99394 13.5157 9.00052 13.428 9.01369 13.3347L9.03343 13.1947C9.13873 12.4484 9.56744 12.0753 10.3196 12.0753H12.0119L11.8934 12.9149H10.2011C10.0131 12.9149 9.9059 13.0082 9.87957 13.1947L9.85983 13.3347C9.85607 13.3589 9.85419 13.3813 9.85419 13.4018C9.85419 13.5436 9.93598 13.6145 10.0996 13.6145H10.6637C11.3237 13.6145 11.6537 13.9019 11.6537 14.4765C11.6537 14.5568 11.6471 14.6426 11.6339 14.734L11.6142 14.8739C11.5089 15.6202 11.0802 15.9934 10.328 15.9934H8.63574Z" fill="#8EBF2F"/>
+              <path d="M8.22948 14.8739C8.12418 15.6202 7.69547 15.9934 6.94334 15.9934H6.23822C5.57823 15.9934 5.24823 15.7061 5.24823 15.1314C5.24823 15.0512 5.25481 14.9654 5.26797 14.8739L5.50771 13.1947C5.61301 12.4484 6.04173 12.0753 6.79385 12.0753H7.49897C8.15897 12.0753 8.48896 12.3626 8.48896 12.9373C8.48896 13.0175 8.48238 13.1033 8.46922 13.1947L8.22948 14.8739ZM6.11412 14.8739C6.11036 14.8963 6.10848 14.9178 6.10848 14.9383C6.10848 15.082 6.19121 15.1538 6.35668 15.1538H7.0618C7.24983 15.1538 7.35701 15.0605 7.38333 14.8739L7.62307 13.1947C7.62684 13.1724 7.62872 13.1509 7.62872 13.1304C7.62872 12.9867 7.54598 12.9149 7.38051 12.9149H6.67539C6.48736 12.9149 6.38018 13.0082 6.35386 13.1947L6.11412 14.8739Z" fill="#8EBF2F"/>
+              <path d="M5.10149 12.0753L4.54585 15.9934H3.69971L4.25534 12.0753H5.10149Z" fill="#8EBF2F"/>
+              <path d="M2.56329 12.0754C3.22328 12.0754 3.55328 12.3627 3.55328 12.9373C3.55328 13.0176 3.5467 13.1034 3.53354 13.1948C3.46208 13.6986 3.26183 13.9784 2.93277 14.0344C3.18662 14.0792 3.31354 14.2732 3.31354 14.6165C3.31354 14.6949 3.30696 14.7807 3.2938 14.874C3.1885 15.6203 2.75978 15.9935 2.00766 15.9935H0.315369L0.871003 12.0754H2.56329ZM1.59869 12.915L1.49715 13.6146H2.34329C2.53133 13.6146 2.63944 13.5213 2.66765 13.3348L2.68739 13.1948C2.69115 13.1724 2.69303 13.151 2.69303 13.1305C2.69303 12.9868 2.6103 12.915 2.44483 12.915H1.59869ZM1.37869 14.4542L1.27997 15.1539H2.12612C2.31415 15.1539 2.42133 15.0606 2.44765 14.874L2.46739 14.7341C2.47116 14.7117 2.47304 14.6902 2.47304 14.6697C2.47304 14.526 2.3903 14.4542 2.22483 14.4542H1.37869Z" fill="#8EBF2F"/>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        // Função para abrir a visualização em Realidade Aumentada
+        function openAR() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // iOS (Safari ou WebView)
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                // Cria um link temporário para o arquivo .usdz e simula um clique
+                const a = document.createElement('a');
+                a.href = "SM_Balanca_FM25.usdz";
+                a.rel = "ar";
+                a.appendChild(document.createElement('img')); // Necessário para o link AR funcionar no iOS
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+            // Android com Scene Viewer
+            else if (/android/i.test(userAgent)) {
+                // Constrói e navega para o intent do Scene Viewer
+                const intentUrl = "intent://arvr.google.com/scene-viewer/1.0?file=" +
+                                  location.origin + location.pathname.replace(/\/[^\/]*$/, '/') +
+                                  "SM_Balanca_FM25.glb&mode=ar_preferred#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=" +
+                                  location.origin + ";end;";
+                window.location.href = intentUrl;
+            }
+            // Fallback para desktop ou dispositivos não compatíveis
+            else {
+                // Em vez de um alert, podemos usar um modal ou uma mensagem na própria página
+                const modelViewer = document.querySelector("model-viewer");
+                if (modelViewer) {
+                    modelViewer.activateAR().catch(error => {
+                        console.error("AR not supported on this device:", error);
+                        // Aqui você pode exibir uma mensagem de erro mais amigável na interface
+                    });
+                }
+            }
+        }
+    </script>
+
 </body>
 </html>
